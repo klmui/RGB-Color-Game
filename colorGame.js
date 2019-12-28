@@ -6,7 +6,7 @@ var colorDisplay = $("#colorDisplay");
 var messageDisplay = $("#message");
 var h1 = $("h1");
 var resetButton = $("#reset");
-var modeButtons = document.querySelectorAll(".mode");
+var modeButtons = $(".mode");
 
 
 init();
@@ -18,15 +18,12 @@ function init(){
 }
 
 function setupModeButtons(){
-	for(var i = 0; i < modeButtons.length; i++){
-		modeButtons[i].addEventListener("click", function(){
-			modeButtons[0].classList.remove("selected");
-			modeButtons[1].classList.remove("selected");
-			this.classList.add("selected");
-			this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
-			reset();
-		});
-	}
+	modeButtons.on("click", function() {
+		modeButtons.removeClass("selected");
+		this.classList.add("selected");
+		this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+		reset();
+	});
 }
 
 function setupSquares(){
