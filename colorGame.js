@@ -5,7 +5,7 @@ var squares = $(".square");
 var colorDisplay = $("#colorDisplay");
 var messageDisplay = $("#message");
 var h1 = $("h1");
-var resetButton = document.querySelector("#reset");
+var resetButton = $("#reset");
 var modeButtons = document.querySelectorAll(".mode");
 
 
@@ -36,7 +36,7 @@ function setupSquares(){
 		//compare color to pickedColor
 		if(clickedColor === pickedColor){
 			messageDisplay.text("Correct!");
-			resetButton.textContent = "Play Again?"
+			resetButton.text("Play Again?");
 			changeColors(clickedColor);
 			h1.css("background", String(clickedColor));
 		} else {
@@ -52,7 +52,7 @@ function reset(){
 	pickedColor = pickColor();
 	//change colorDisplay to match picked Color
 	colorDisplay.text(String(pickedColor));
-	resetButton.textContent = "New Colors"
+	resetButton.text("New Colors");
 	messageDisplay.text("");
 	//change colors of squares	
 	for(var i = 0; i < squares.length; i++){
@@ -65,7 +65,7 @@ function reset(){
 	h1.css("background", "steelblue");
 }
 
-resetButton.addEventListener("click", function(){
+resetButton.on("click", function() {
 	reset();
 })
 
