@@ -4,7 +4,7 @@ var pickedColor;
 var squares = document.querySelectorAll(".square");
 var colorDisplay = document.getElementById("colorDisplay");
 var messageDisplay = $("#message");
-var h1 = document.querySelector("h1");
+var h1 = $("h1");
 var resetButton = document.querySelector("#reset");
 var modeButtons = document.querySelectorAll(".mode");
 
@@ -68,7 +68,7 @@ function reset(){
 			squares[i].style.display = "none";
 		}
 	}
-	h1.style.background = "steelblue";
+	h1.css("background", "steelblue");
 }
 
 resetButton.addEventListener("click", function(){
