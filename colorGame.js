@@ -1,6 +1,8 @@
 var numSquares = 6;
 var colors = [];
 var pickedColor;
+
+// jQuery Selectors
 var squares = $(".square");
 var colorDisplay = $("#colorDisplay");
 var messageDisplay = $("#message");
@@ -11,21 +13,31 @@ var modeButtons = $(".mode");
 
 init();
 
+// Initialize game
 function init(){
 	setupModeButtons();
 	setupSquares();
 	reset();
 }
 
+// Sets up the buttons for easy, medium, and hard modes
 function setupModeButtons(){
 	modeButtons.on("click", function() {
 		modeButtons.removeClass("selected");
 		this.classList.add("selected");
-		this.textContent === "Easy" ? numSquares = 3: numSquares = 6;
+		// Sets the number of squares to the difficulty selected by the user
+		if (this.textContent === "Easy") {
+			numSquares = 3;
+		} else if (this.textContent === "Medium") {
+			numSquares = 6;
+		} else {
+			numSquares = 9;
+		}
 		reset();
 	});
 }
 
+// Logic for each square
 function setupSquares(){
 	squares.on("click", function() {
 		//grab color of clicked square
@@ -43,6 +55,7 @@ function setupSquares(){
 	});
 }
 
+// Logic for the reset button
 function reset(){
 	colors = generateRandomColors(numSquares);
 	//pick a new random color from array
@@ -62,20 +75,24 @@ function reset(){
 	h1.css("background", "steelblue");
 }
 
+// jQuery event listener for reset button
 resetButton.on("click", function() {
 	reset();
 })
 
+// When the correct square is picked, all change to the specified color
 function changeColors(color){
 	//change each color to match given color
 	squares.css("background", color);
 }
 
+// Picks a random color from the colors array to be the correct color
 function pickColor(){
 	var random = Math.floor(Math.random() * colors.length);
 	return colors[random];
 }
 
+// Generates a number of random colors based on the difficulty and stores them in an array
 function generateRandomColors(num){
 	//make an array
 	var arr = []
@@ -88,6 +105,7 @@ function generateRandomColors(num){
 	return arr;
 }
 
+// Generates random values for R, G, and B
 function randomColor(){
 	//pick a "red" from 0 - 255
 	var r = Math.floor(Math.random() * 256);
