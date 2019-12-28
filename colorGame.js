@@ -1,7 +1,7 @@
 var numSquares = 6;
 var colors = [];
 var pickedColor;
-var squares = document.querySelectorAll(".square");
+var squares = $(".square");
 var colorDisplay = document.getElementById("colorDisplay");
 var messageDisplay = $("#message");
 var h1 = $("h1");
@@ -30,26 +30,21 @@ function setupModeButtons(){
 }
 
 function setupSquares(){
-	for(var i = 0; i < squares.length; i++){
-	//add click listeners to squares
-		squares[i].addEventListener("click", function(){
-			//grab color of clicked square
-			var clickedColor = this.style.background;
-			//compare color to pickedColor
-			if(clickedColor === pickedColor){
-				messageDisplay.text("Correct!");
-				resetButton.textContent = "Play Again?"
-				changeColors(clickedColor);
-				h1.style.background = clickedColor;
-			} else {
-				this.style.background = "#232323";
-				messageDisplay.text("Try Again");
-			}
-		});
-	}
+	squares.on("click", function() {
+		//grab color of clicked square
+		var clickedColor = this.style.background;
+		//compare color to pickedColor
+		if(clickedColor === pickedColor){
+			messageDisplay.text("Correct!");
+			resetButton.textContent = "Play Again?"
+			changeColors(clickedColor);
+			h1.css("background", String(clickedColor));
+		} else {
+			this.style.background = "#232323";
+			messageDisplay.text("Try Again");
+		}
+	});
 }
-
-
 
 function reset(){
 	colors = generateRandomColors(numSquares);
@@ -59,13 +54,12 @@ function reset(){
 	colorDisplay.textContent = pickedColor;
 	resetButton.textContent = "New Colors"
 	messageDisplay.text("");
-	//change colors of squares
+	//change colors of squares	
 	for(var i = 0; i < squares.length; i++){
 		if(colors[i]){
-			squares[i].style.display = "block"
-			squares[i].style.background = colors[i];
+			squares.get(i).setAttribute("style", "background:" + String(colors[i]) + "; display: block;");
 		} else {
-			squares[i].style.display = "none";
+			squares.get(i).setAttribute("style", "display: none");
 		}
 	}
 	h1.css("background", "steelblue");
@@ -76,11 +70,8 @@ resetButton.addEventListener("click", function(){
 })
 
 function changeColors(color){
-	//loop through all squares
-	for(var i = 0; i < squares.length; i++){
-		//change each color to match given color
-		squares[i].style.background = color;
-	}
+	//change each color to match given color
+	squares.css("background", color);
 }
 
 function pickColor(){
