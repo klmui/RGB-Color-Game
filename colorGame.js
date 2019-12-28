@@ -2,7 +2,7 @@ var numSquares = 6;
 var colors = [];
 var pickedColor;
 var squares = $(".square");
-var colorDisplay = document.getElementById("colorDisplay");
+var colorDisplay = $("#colorDisplay");
 var messageDisplay = $("#message");
 var h1 = $("h1");
 var resetButton = document.querySelector("#reset");
@@ -51,7 +51,7 @@ function reset(){
 	//pick a new random color from array
 	pickedColor = pickColor();
 	//change colorDisplay to match picked Color
-	colorDisplay.textContent = pickedColor;
+	colorDisplay.text(String(pickedColor));
 	resetButton.textContent = "New Colors"
 	messageDisplay.text("");
 	//change colors of squares	
